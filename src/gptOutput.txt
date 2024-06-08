@@ -1,0 +1,147 @@
+dlsim
+-m (mcs1) -> Modulation and Coding Scheme (MCS) defines the mapping of information bits to modulation symbols and channel coding rate: 5, 4, 15, 25, 26, 14, 13
+-g (memcpy(channel_model_input,optarg,10);) -> memcpy operation to copy channel model input data: F, G
+-s (snr0) -> Signal-to-Noise Ratio (SNR) representing the ratio of signal power to noise power: 1, 0, 6.7, 1.4, 17.4, 17.5, 17.7, 17.6, 17.3, 16.6, 6.8, 5.9
+-w (snr_int) -> Integer representation of the SNR value: 1.0
+-f (input_snr_step) -> Step size for changing the input SNR value: .2
+-n (n_frames) -> Number of frames to be processed: 500
+-B (channel_model) -> Channel model configuration: 50, 6, 25, 100
+-c (num_pdcch_symbols) -> Number of PDCCH (Physical Downlink Control Channel) symbols: 2, 4, 3
+-z (n_rx) -> Number of receiving antennas: 2
+-6 () -> Undefined variable
+-2 () -> Undefined variable
+-r (DLSCH_RB_ALLOC) -> Downlink Shared Channel (DL-SCH) resource block allocation: 1022, 1600, 1899
+-x (transmission_mode) -> Transmission mode for downlink transmission: 2
+-y (n_tx_phy) -> Number of physical transmit antennas: 2
+
+ulsim
+-BnbRBs () -> Number of baseband resource blocks: 25, 50, 100
+-mcs () -> Modulation and Coding Scheme (MCS) for uplink transmission: 5, 16
+-yN_rx () -> Number of receiving antennas: 1
+-gchannel () -> Channel configuration for uplink transmission: N
+-xTransmission () -> Transmission mode for uplink transmission: 1
+-snr () -> Signal-to-Noise Ratio (SNR) for uplink transmission: 6, 12
+-wsnrInterrupt () -> Interrupt-based SNR value for uplink transmission: 1.0
+-e_snr_step () -> Step size for changing the SNR value in uplink transmission: .1
+-P (dump_perf) -> Dump performance statistics
+-nb_frame () -> Number of frames to be processed: 500
+-7 () -> Undefined variable
+
+ldpc
+-l (block_length) -> Block length for LDPC (Low-Density Parity-Check) coding: 3872, 4224, 4576, 4928, 5280, 5632, 6336, 7040, 7744, 8448
+-s (SNR0) -> Initial Signal-to-Noise Ratio (SNR): 10
+-n (n_trials) -> Number of LDPC decoding trials: 100
+
+polartest
+-q (decoder_int16) -> Undefined variable
+-s (SNRstart) -> Starting Signal-to-Noise Ratio (SNR) for testing: -10, -2
+-f (SNRstop) -> Ending Signal-to-Noise Ratio (SNR) for testing: 0, 2
+-m (polarMessageType) -> Polar message type for testing: 1, 2
+-k (testLength) -> Length of the test: 12, 20
+
+nr_pbchsim
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for PBCH (Physical Broadcast Channel) simulation: -11
+-S (snr1) -> Additional Signal-to-Noise Ratio (SNR) for PBCH simulation: -8
+-n (n_trials) -> Number of PBCH simulation trials: 10
+-R (N_RB_DL) -> Number of resource blocks for downlink: 106, 217, 273
+-o (cfo) -> Carrier Frequency Offset (CFO) value for PBCH simulation: 8000
+-I (run_initial_sync) -> Run initial synchronization
+-O (ssb_subcarrier_offset) -> Subcarrier offset for Synchronization Signal Blocks (SSBs): 6
+
+nr_dlsim
+-n (n_trials) -> Number of downlink simulation trials: 100, 10
+-R (N_RB_DL) -> Number of resource blocks for downlink: 106, 217, 273, 25
+-b (g_rbSize) -> Size of resource blocks for downlink: 106, 217, 273, 100, 25
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for downlink simulation: 5, 30, 10, 1, 2, 20
+-a (g_rbStart) -> Starting resource block for downlink simulation: 25, 51, 80, 110
+-e (g_mcsIndex) -> MCS (Modulation and Coding Scheme) index for downlink simulation: 27, 16, 26, 0
+-q (g_mcsTableIdx) -> MCS table index for downlink simulation: 1
+-t (eff_tp_check) -> Effective throughput check value for downlink simulation: 25, 33, 50, 95
+-T (enable_ptrs) -> Enable PTRS (Phase-Tracking Reference Signals) for downlink simulation: 222, 212, 204
+-U (modify_dmrs) -> DMRS (Demodulation Reference Signal) modification for downlink simulation: 201, 202, 213, 3002
+-g (switch((char)*optarg){) -> Variable value based on switch condition: R
+-x (g_nrOfLayers) -> Number of layers for downlink transmission: 1, 2
+-y (n_tx) -> Number of transmit antennas: 4
+-z (n_rx) -> Number of receiving antennas: 4
+-m (mu) -> Numerology value for downlink simulation: 0
+-i (for(i) -> Variable used in for loop: 210
+-S (snr1) -> Additional Signal-to-Noise Ratio (SNR) for downlink simulation: -1.0
+
+nr_dlschsim
+-R (N_RB_DL) -> Number of resource blocks for downlink: 106, 217, 273
+-m (Imcs) -> MCS (Modulation and Coding Scheme) index for downlink: 9, 15, 19
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for downlink simulation: 13, 15, 20
+-n (n_trials) -> Number of downlink simulation trials: 100
+
+shortblocktest
+-l (messageLength) -> Length of the message for short block testing: 3, 6, 7, 11
+-s (SNRstart) -> Starting Signal-to-Noise Ratio (SNR) for testing: -4
+-d (SNRinc) -> Increment value for Signal-to-Noise Ratio (SNR) in testing: 1
+-i (iterations) -> Number of iterations for testing:
+
+10000
+
+nr_ulschsim
+-R (N_RB_UL) -> Number of resource blocks for uplink: 106, 217, 273
+-m (Imcs) -> MCS (Modulation and Coding Scheme) index for uplink: 9, 15, 19
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for uplink simulation: 13, 15, 20
+-n (n_trials) -> Number of uplink simulation trials: 100
+-y (n_tx) -> Number of transmit antennas: 4
+-z (n_rx) -> Number of receiving antennas: 4
+-W (Nl) -> Number of layers for precoding: 4
+
+nr_pucchsim
+-R (N_RB_DL) -> Number of resource blocks for downlink: 106
+-i (nrofSymbols) -> Number of symbols: 1
+-P (format) -> PUCCH (Physical Uplink Control Channel) format: 0, 2
+-b (nr_bit) -> Number of bits: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 19, 32, 64
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for PUCCH simulation: -2, 0, 1, 2, 3, 4, 5, 6, -3
+-n (n_trials) -> Number of PUCCH simulation trials: 1000
+-c (sr_flag) -> SR (Scheduling Request) flag
+-q (nrofPRB) -> Number of PRBs (Physical Resource Blocks): 8, 16
+
+dlsim_tm4
+-m (mcs1) -> Modulation and Coding Scheme (MCS) defines the mapping of information bits to modulation symbols and channel coding rate: 5, 4, 15, 14, 25, 26, 13
+-g (memcpy(channel_model_input,optarg,17);) -> memcpy operation to copy channel model input data: F, G
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for downlink simulation: -1, 0, 6.7, 1.4, 17.4, 17.5, 17.7, 6.8, 5.9
+-w (snr_int) -> Integer representation of the SNR value: 1.0
+-f (input_snr_step) -> Step size for changing the input SNR value: .2
+-n (n_frames) -> Number of frames to be processed: 500
+-B (channel_model) -> Channel model configuration: 50, 6, 25
+-c (num_pdcch_symbols) -> Number of PDCCH (Physical Downlink Control Channel) symbols: 2, 4, 3
+-z (n_rx) -> Number of receiving antennas: 2
+-O (test_perf) -> Performance test value: 70, 30
+-r (DLSCH_RB_ALLOC) -> Downlink Shared Channel (DL-SCH) resource block allocation: 1022
+-x (transmission_mode) -> Transmission mode for downlink transmission: 2
+-y (n_tx_phy) -> Number of physical transmit antennas: 2
+
+nr_ulsim
+-n (n_trials) -> Number of uplink simulation trials: 100, 50, 200
+-m (Imcs) -> MCS (Modulation and Coding Scheme) index for uplink: 9, 16, 28, 19, 0
+-r (ricean_factor) -> Ricean factor for uplink simulation: 106, 217, 273, 75, 216, 270, 25
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for uplink simulation: 5, 10, 20, 8.8, 5.4, 3.4
+-R (N_RB_DL) -> Number of resource blocks for downlink: 217, 273, 25
+-U (modify_dmrs) -> DMRS (Demodulation Reference Signal) modification for uplink simulation: 40111, 40211, 41211, 41311, 40212, 41112
+-T (enable_ptrs) -> Enable PTRS (Phase-Tracking Reference Signals) for uplink simulation: 212, 222
+-a (start_symbol) -> Starting symbol for uplink transmission: 4
+-b (nb_symb_sch) -> Number of symbols for uplink scheduling: 8, 14
+-Z (transform_precoding) -> Transform precoding value
+-S (snr1) -> Additional Signal-to-Noise Ratio (SNR) for uplink simulation: 15, 9.4, 6, 3.8, -0.6
+-z (n_rx) -> Number of receiving antennas: 2, 4, 8
+-W (precod_nbr_layers) -> Number of layers for precoding: 2, 4
+-y (n_tx) -> Number of transmit antennas: 2, 4
+-u (mu) -> Numerology value for uplink simulation: 0
+-i (i) -> Variable used in the loop: 210
+-g () -> Variable value: I
+-t (eff_tp_check) -> Effective throughput check value: 70
+-I (max_ldpc_iterations) -> Maximum number of LDPC (Low-Density Parity-Check) iterations: 15
+
+nr_prachsim
+-a (printf("RunningAWGNsimulation\n");) -> Print statement for running AWGN (Additive White Gaussian Noise) simulation
+-s (snr0) -> Initial Signal-to-Noise Ratio (SNR) for PRACH (Physical Random Access Channel) simulation: -30
+-n (n_frames) -> Number of frames to be processed: 100
+-p (preamble_tx) -> Preamble index for PRACH simulation: 63, 32, 99
+-R (N_RB_UL) -> Number of resource blocks for uplink: 106, 217, 273, 32, 66, 25
+-c (config_index) -> Configuration index for PRACH simulation: 4, 52
+-m (mu) -> Numerology value for PRACH simulation: 3, 0
+-H (printf("High-SpeedFlagenabled\n");) -> Print statement for enabling the High-Speed Flag

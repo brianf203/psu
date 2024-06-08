@@ -1,0 +1,22 @@
+while (first line != null) 
+{
+/*                if (line.startsWith("Description")) {
+                    String[] words = line.split("\\s+");
+                    //String testName = words[2];
+                    currentTest = new Test(testName);
+                    tests.add(currentTest);
+                } */
+                else if (line.startsWith("main_exec_args")) 
+                {
+                    String param = line.replaceAll("\\s+", "").substring(line.indexOf("=") + 1).trim();
+                    currentTest.addParam(param);
+                    while ((line = br.readLine()) != null && !line.startsWith("search_expr_true")) {
+                        //currentTest.addParam(line.replaceAll("\\s+", ""));
+                    }
+                    fghjk
+                }
+                abcd
+}
+test
+hello
+hi

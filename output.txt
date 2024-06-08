@@ -1,0 +1,146 @@
+dlsim
+-m () -> TEMP: 5, 4, 15, 25, 26, 14, 13
+-g () -> TEMP: F, G
+-s () -> TEMP: 1, 0, 6.7, 1.4, 17.4, 17.5, 17.7, 17.6, 17.3, 16.6, 6.8, 5.9
+-w () -> TEMP: 1.0
+-f () -> TEMP: .2
+-n () -> TEMP: 500
+-B () -> TEMP: 50, 6, 25, 100
+-c () -> TEMP: 2, 4, 3
+-z () -> TEMP: 2
+-6 () -> TEMP: 0
+-2 () -> TEMP: 5
+-r () -> TEMP: 1022, 1600, 1899
+-x () -> TEMP: 2
+-y () -> TEMP: 2
+
+ulsim
+-BnbRBs () -> TEMP: 25, 50, 100
+-mcs () -> TEMP: 5, 16
+-yN_rx () -> TEMP: 1
+-gchannel () -> TEMP: N
+-xTransmission () -> TEMP: 1
+-snr () -> TEMP: 6, 12
+-wsnrInterrupt () -> TEMP: 1.0
+-e_snr_step () -> TEMP: .1
+-P () -> TEMP: 
+-nb_frame () -> TEMP: 500
+-7 () -> TEMP: 0
+
+ldpc
+-l () -> TEMP: 3872, 4224, 4576, 4928, 5280, 5632, 6336, 7040, 7744, 8448
+-s () -> TEMP: 10
+-n () -> TEMP: 100
+
+polartest
+-q () -> TEMP: 
+-s () -> TEMP: -10, -2
+-f () -> TEMP: 0, 2
+-m () -> TEMP: 1, 2
+-k () -> TEMP: 12, 20
+
+nr_pbchsim
+-s () -> TEMP: -11
+-S () -> TEMP: -8
+-n () -> TEMP: 10
+-R () -> TEMP: 106, 217, 273
+-o () -> TEMP: 8000
+-I () -> TEMP: 
+-O () -> TEMP: 6
+
+nr_dlsim
+-n () -> TEMP: 100, 10
+-R () -> TEMP: 106, 217, 273, 25
+-b () -> TEMP: 106, 217, 273, 100, 25
+-s () -> TEMP: 5, 30, 10, 1, 2, 20
+-a () -> TEMP: 25, 51, 80, 110
+-e () -> TEMP: 27, 16, 26, 0
+-q () -> TEMP: 1
+-t () -> TEMP: 25, 33, 50, 95
+-T () -> TEMP: 222, 212, 204
+-U () -> TEMP: 201, 202, 213, 3002
+-g () -> TEMP: R
+-x () -> TEMP: 1, 2
+-y () -> TEMP: 4
+-z () -> TEMP: 4
+-m () -> TEMP: 0
+-i () -> TEMP: 210
+-S () -> TEMP: -1.0
+
+nr_dlschsim
+-R () -> TEMP: 106, 217, 273
+-m () -> TEMP: 9, 15, 19
+-s () -> TEMP: 13, 15, 20
+-n () -> TEMP: 100
+
+shortblocktest
+-l () -> TEMP: 3, 6, 7, 11
+-s () -> TEMP: -4
+-d () -> TEMP: 1
+-i () -> TEMP: 10000
+
+nr_ulschsim
+-R () -> TEMP: 106, 217, 273
+-m () -> TEMP: 9, 15, 19
+-s () -> TEMP: 13, 15, 20
+-n () -> TEMP: 100
+-y () -> TEMP: 4
+-z () -> TEMP: 4
+-W () -> TEMP: 4
+
+nr_pucchsim
+-R () -> TEMP: 106
+-i () -> TEMP: 1
+-P () -> TEMP: 0, 2
+-b () -> TEMP: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 19, 32, 64
+-s () -> TEMP: -2, 0, 1, 2, 3, 4, 5, 6, -3
+-n () -> TEMP: 1000
+-c () -> TEMP: 
+-q () -> TEMP: 8, 16
+
+dlsim_tm4
+-m () -> TEMP: 5, 4, 15, 14, 25, 26, 13
+-g () -> TEMP: F, G
+-s () -> TEMP: -1, 0, 6.7, 1.4, 17.4, 17.5, 17.7, 6.8, 5.9
+-w () -> TEMP: 1.0
+-f () -> TEMP: .2
+-n () -> TEMP: 500
+-B () -> TEMP: 50, 6, 25
+-c () -> TEMP: 2, 4, 3
+-z () -> TEMP: 2
+-O () -> TEMP: 70, 30
+-r () -> TEMP: 1022
+-x () -> TEMP: 2
+-y () -> TEMP: 2
+
+nr_ulsim
+-n () -> TEMP: 100, 50, 200
+-m () -> TEMP: 9, 16, 28, 19, 0
+-r () -> TEMP: 106, 217, 273, 75, 216, 270, 25
+-s () -> TEMP: 5, 10, 20, 8.8, 5.4, 3.4
+-R () -> TEMP: 217, 273, 25
+-U () -> TEMP: 40111, 40211, 41211, 41311, 40212, 41112
+-T () -> TEMP: 212, 222
+-a () -> TEMP: 4
+-b () -> TEMP: 8, 14
+-Z () -> TEMP: 
+-S () -> TEMP: 15, 9.4, 6, 3.8, -0.6
+-z () -> TEMP: 2, 4, 8
+-W () -> TEMP: 2, 4
+-y () -> TEMP: 2, 4
+-u () -> TEMP: 0
+-i () -> TEMP: 210
+-g () -> TEMP: I
+-t () -> TEMP: 70
+-I () -> TEMP: 15
+
+nr_prachsim
+-a () -> TEMP: 
+-s () -> TEMP: -30
+-n () -> TEMP: 100
+-p () -> TEMP: 63, 32, 99
+-R () -> TEMP: 106, 217, 273, 32, 66, 25
+-c () -> TEMP: 4, 52
+-m () -> TEMP: 3, 0
+-H () -> TEMP: 
+
