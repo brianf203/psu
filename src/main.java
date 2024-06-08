@@ -67,7 +67,8 @@ public class main {
             // Loop through tests
             for (Test test : tests) {
             	// System.out.println("TEST TEST TEST" + test.getTestName());
-                writer.println(test.getTestName());
+            	writer.println("=================================================");
+                writer.println("TEST LAYER: " + test.getTestName());
                 
                 // LinkedHashMap to store each unique parameter and its range of values for test
                 LinkedHashMap<String, Set<String>> resultMap = new LinkedHashMap<>();
@@ -124,18 +125,18 @@ public class main {
                 		}
                 	}
                 }
-                
+				LinkedHashMap<Integer, ArrayList<String>> methodCode = new LinkedHashMap<>();
+
                 // Creating HashMap of lines and associated methods
 				try {
 					BufferedReader br2 = new BufferedReader(new FileReader("src/" + test.getTestName() + ".txt"));
 					String line2;
-					LinkedHashMap<Integer, ArrayList<String>> methodCode = new LinkedHashMap<>();
 					int num = 1;
 					String prev = "";
 					// Check to see if start of function
 					while ((line2 = br2.readLine()) != null) {
 						// THIS DOESNT CHECK FOR /* AND */
-						if (!line2.contains("}") && line2.contains("{") && !line2.matches(".*\\/\\*[^*]*\\{[^*]*\\*\\/.*")) {
+						if (!line2.contains("}") && line2.contains("{") && !line2.contains("main") && !line2.matches(".*\\/\\*[^*]*\\{[^*]*\\*\\/.*")) {
 							if (!line2.matches(".*(['\"]).*\\{.*\\1.*") && !line2.matches(".*//.*\\{.*")) {
 								count1++;
 								if (line2.trim().charAt(0) == '{') {
@@ -190,7 +191,6 @@ public class main {
         				}
         				else if ((temp.contains("/*") && !comment) || (temp.contains("*/") && comment)) {
         					newLine = "";
-        					comment = true; 
         					for (int i = 0; i < temp.length(); i++) {
 
         						if (!comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("//")) {
@@ -211,9 +211,9 @@ public class main {
         						skip = false;
         					}
         				}
-        				if (newLine.contains("case'")) {
+        				if (!isCase && newLine.contains("case'")) {
         					isCase = true;
-        					caseName = newLine.substring(newLine.indexOf("case") + 4, newLine.indexOf(":")) + "";
+        					caseName = newLine.substring(newLine.indexOf("case'") + 5, newLine.indexOf("':")) + "";
         				}
         				else if (isCase) {
         					if (newLine.contains("break;") || newLine.contains("exit")) {
@@ -227,7 +227,11 @@ public class main {
                             	
         					}
         					if (newLine.matches("[^=]*=[^=]*;")) {
-            					vars.add(newLine.split("=")[0]);
+        						if (!newLine.contains("+=") && !newLine.contains("-=")) {
+        							if (newLine.split("=")[0].length() > 1) {
+                    					vars.add(newLine.split("=")[0]);
+        							}
+        						}
             				}
         				}
         				
@@ -242,8 +246,6 @@ public class main {
                 for (Map.Entry<String, Set<String>> entry : resultMap.entrySet()) {
                     String paramName = entry.getKey();
                     Set<String> paramValues = entry.getValue();
-                    Set<String> variables = new HashSet<>();
-                    String var = "";
                     
                     // Check if value is empty
                     if (paramValues.contains("") && paramName.length() == 3) {
@@ -251,53 +253,69 @@ public class main {
                     	paramName = paramName.substring(0, 2);
                     }
                     // start searching for variables
-					
-                    
-                    try {
-    					BufferedReader br3 = new BufferedReader(new FileReader("src/" + test.getTestName() + ".txt"));
-    					String line3;
-    					String newLine = "";
-    					boolean comment = false;
-    					boolean skip = false;
-    					while ((line3 = br3.readLine()) != null) {
-    						line3 = line3.trim();
-    						if (!comment && ((line3.contains("//") && line3.contains("/*") && line3.indexOf("//") < line3.indexOf("/*")) || (line3.contains("//") && !line3.contains("/*")))) {
-    							line3 = line3.substring(0, line3.indexOf("//"));
-    						}
-    						else if ((line3.contains("/*") && !comment) || (line3.contains("*/") && comment)) {
-    							line3 = "";
-    							comment = true; 
-    							for (int i = 0; i < line3.length(); i++) {
-
-    								if (!comment && i < (line3.length() - 1) && line3.substring(i, i + 2).equals("//")) {
-    									break;
-    								}
-    								else if (!comment && i < (line3.length() - 1) && line3.substring(i, i + 2).equals("/*")) {
-    									comment = true;
-    									i++;
-    								}
-    								else if (comment && i < (line3.length() - 1) && line3.substring(i, i + 2).equals("*/")) {
-    									comment = false;
-    									skip = true;
-    									i++;
-    								}
-    								else if (!comment && !skip) {
-    									newLine += line3.charAt(i);
-    								}
-    								skip = false;
-    							}
-    						}
-    						if (newLine.contains("case '" + paramName + "':")) {
-    							// start looping again until the break
-    						}
-    					}
-                    }
-                    catch (IOException e) {
-    					e.printStackTrace();
-    				}
-                    
-                
-
+					paramName = paramName.substring(1, paramName.length());
+					writer.println("-------------------------------------------------");
+					writer.println("PARAMETER: -" + paramName + ", VARIABLE(S): " + cases.get(paramName));
+					writer.println("-------------------------------------------------");
+					if (cases.get(paramName) == null) {
+						writer.println("NO DATA");
+					}
+					else {
+	                    //writer.print(paramName);
+	                    try {
+	    					BufferedReader br3 = new BufferedReader(new FileReader("src/" + test.getTestName() + ".txt"));
+	    					String line3;
+	    					String newLine = "";
+	    					boolean comment = false;
+	    					boolean skip = false;
+	    					int num = 0;
+	    			        LinkedHashSet<ArrayList<String>> set = new LinkedHashSet<>();
+	    					while ((line3 = br3.readLine()) != null) {
+	    						num++;
+	    						line3 = line3.trim();
+	    						newLine = line3;
+	    						if (!comment && ((line3.contains("//") && line3.contains("/*") && line3.indexOf("//") < line3.indexOf("/*")) || (line3.contains("//") && !line3.contains("/*")))) {
+	    							line3 = line3.substring(0, line3.indexOf("//"));
+	    						}
+	    						else if ((line3.contains("/*") && !comment) || (line3.contains("*/") && comment)) {
+	    							newLine = "";
+	    							for (int i = 0; i < line3.length(); i++) {
+	
+	    								if (!comment && i < (line3.length() - 1) && line3.substring(i, i + 2).equals("//")) {
+	    									break;
+	    								}
+	    								else if (!comment && i < (line3.length() - 1) && line3.substring(i, i + 2).equals("/*")) {
+	    									comment = true;
+	    									i++;
+	    								}
+	    								else if (comment && i < (line3.length() - 1) && line3.substring(i, i + 2).equals("*/")) {
+	    									comment = false;
+	    									skip = true;
+	    									i++;
+	    								}
+	    								else if (!comment && !skip) {
+	    									newLine += line3.charAt(i);
+	    								}
+	    								skip = false;
+	    							}
+	    						}
+	    						if (containsAnySubstring(newLine, cases.get(paramName))) {
+	    							if (methodCode.containsKey(num)) {
+	    								set.add(methodCode.get(num));
+	    							}
+	    							else {
+	    								ArrayList<String> temp = new ArrayList<>();
+	    								temp.add(newLine);
+	    								set.add(temp);
+	    							}
+	    						}
+	    					}
+	    					writer.println(set);
+	                    }
+	                    catch (IOException e) {
+	    					e.printStackTrace();
+	    				}
+					}
                     // writer.println(paramName + " (" + variables + ") -> " + "TEMP" + ": " + String.join(", ", paramValues));
                 }
                 writer.println();
@@ -368,7 +386,6 @@ public class main {
 	    				skip = false;
 	    			}
 	    		}
-				String tempLine = line.replaceAll("\\s+", "");
 
 				// here i can remove quotes too, i can also do it in the above loop, while comment is false look for quote as well
 				
@@ -434,5 +451,12 @@ public class main {
     	}
     	return methodCode;
     }
- 
+    public static boolean containsAnySubstring(String str, Set<String> set) {
+        for (String s : set) {
+            if (str.contains(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
