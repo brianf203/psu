@@ -173,6 +173,71 @@ public class main {
 					e.printStackTrace();
 				}
                 
+            	try {
+            		BufferedReader tempBr = new BufferedReader(new FileReader("src/" + test.getTestName() + ".txt"));
+                	boolean comment = false;
+                	boolean skip = false;
+                	boolean isCase = false;
+                	String caseName = "";
+                	String newLine = "";
+                	String temp = "";
+                	Set<String> vars = new HashSet<>();
+        			while ((temp = tempBr.readLine()) != null) {
+        				temp = temp.replaceAll("\\s+", "");
+        				newLine = temp;
+        				if (!comment && ((temp.contains("//") && temp.contains("/*") && temp.indexOf("//") < temp.indexOf("/*")) || (temp.contains("//") && !temp.contains("/*")))) {
+        					newLine = temp.substring(0, temp.indexOf("//"));
+        				}
+        				else if ((temp.contains("/*") && !comment) || (temp.contains("*/") && comment)) {
+        					newLine = "";
+        					comment = true; 
+        					for (int i = 0; i < temp.length(); i++) {
+
+        						if (!comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("//")) {
+        							break;
+        						}
+        						else if (!comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("/*")) {
+        							comment = true;
+        							i++;
+        						}
+        						else if (comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("*/")) {
+        							comment = false;
+        							skip = true;
+        							i++;
+        						}
+        						else if (!comment && !skip) {
+        							newLine += temp.charAt(i);
+        						}
+        						skip = false;
+        					}
+        				}
+        				if (newLine.contains("case'")) {
+        					isCase = true;
+        					caseName = newLine.substring(newLine.indexOf("case") + 4, newLine.indexOf(":")) + "";
+        				}
+        				else if (isCase) {
+        					if (newLine.contains("break;") || newLine.contains("exit")) {
+        						isCase = false;
+        						cases.put(caseName, vars);
+        						//for (String element : vars) {
+                                //    System.out.println(element);
+                                //}
+        						vars = new HashSet<>();
+                            	//System.out.println(caseName);
+                            	
+        					}
+        					if (newLine.matches("[^=]*=[^=]*;")) {
+            					vars.add(newLine.split("=")[0]);
+            				}
+        				}
+        				
+        			}
+        			
+        		} 
+            	catch (IOException e) {
+        			e.printStackTrace();
+        		}
+				
                 // Loop through resultMap
                 for (Map.Entry<String, Set<String>> entry : resultMap.entrySet()) {
                     String paramName = entry.getKey();
@@ -186,6 +251,8 @@ public class main {
                     	paramName = paramName.substring(0, 2);
                     }
                     // start searching for variables
+					
+                    
                     try {
     					BufferedReader br3 = new BufferedReader(new FileReader("src/" + test.getTestName() + ".txt"));
     					String line3;
@@ -301,9 +368,8 @@ public class main {
 	    				skip = false;
 	    			}
 	    		}
-				if (line.contains("case")) {
-					//addCase(br, line);
-				}
+				String tempLine = line.replaceAll("\\s+", "");
+
 				// here i can remove quotes too, i can also do it in the above loop, while comment is false look for quote as well
 				
 				// EVEN MORE ACCURATE: MAKE { } LOGIC SAME AS COMMENT. IF ON LINE SCAN REST OF LINE 
@@ -367,57 +433,6 @@ public class main {
     		methodCode.put(lines.get(i), code);
     	}
     	return methodCode;
-    }
-    public static void addCase (BufferedReader br, String line) {
-    	System.out.println(" hello ");
-    	BufferedReader tempBr = br;
-    	boolean comment = false;
-    	boolean skip = false;
-    	String newLine = "";
-    	String temp = "";
-    	Set<String> vars = new HashSet<>();
-    	try {
-			while ((temp = tempBr.readLine()) != null) {
-				temp = temp.trim();
-				if (!comment && ((temp.contains("//") && temp.contains("/*") && temp.indexOf("//") < temp.indexOf("/*")) || (temp.contains("//") && !temp.contains("/*")))) {
-					temp = temp.substring(0, temp.indexOf("//"));
-				}
-				else if ((temp.contains("/*") && !comment) || (temp.contains("*/") && comment)) {
-					temp = "";
-					comment = true; 
-					for (int i = 0; i < temp.length(); i++) {
-
-						if (!comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("//")) {
-							break;
-						}
-						else if (!comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("/*")) {
-							comment = true;
-							i++;
-						}
-						else if (comment && i < (temp.length() - 1) && temp.substring(i, i + 2).equals("*/")) {
-							comment = false;
-							skip = true;
-							i++;
-						}
-						else if (!comment && !skip) {
-							newLine += temp.charAt(i);
-						}
-						skip = false;
-					}
-				}
-				if (newLine.contains("break;")) {
-					break;
-				}
-				if (newLine.matches("[^=]*=[^=]*;")) {
-					vars.add(newLine.split("=")[0]);
-				}
-			}
-		} 
-    	catch (IOException e) {
-			e.printStackTrace();
-		}
-    	line = line.replace("\\s+", "");
-    	cases.put(line.charAt(line.indexOf("case'") + 5) + "", vars);
     }
  
 }
