@@ -70,7 +70,7 @@ def match_code(query_embedding: List[float], similarity_threshold: float = 0.996
     return cursor.fetchall()
 
 def main():
-    codebase_path = "./codebase1"
+    codebase_path = "./codebase"
     process_codebase(codebase_path)
 
     query = "Yes, this code relates to test case generation"
@@ -78,10 +78,10 @@ def main():
     matches = match_code(query_embedding)
     combined_matches = " ".join([match[1] for match in matches])
 
-    with open("./codebase1/input1.txt", 'r') as f:
+    with open("./codebase/existingtests.txt", 'r') as f:
         existing_tests_code = f.read()
 
-    final_query = f"Generate test cases in OAI 5G that cover more of the range of exisiting parameters, 
+    final_query = f"Generate test cases in OAI 5G that cover more of the range of existing parameters, 
     or use new parameters. Give me these new test cases in the same format as the existing test cases. 
     Existing test cases: {existing_tests_code}\nSource code with all parameters: {combined_matches}"
     response = genai.generate_content(prompt=final_query)
